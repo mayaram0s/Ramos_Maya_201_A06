@@ -302,6 +302,18 @@ Example: The number 312 would return 6 (3 + 1 + 2)
 Run your function with 935068.
 
 ```{r}
+sum_digits <- function(number){
+  if(number == 0){ # base case
+    return(0)
 
+  }else{ # recursive case
+    last_digit <- number %% 10 # remainder when divided by 10 = last number 
+    trunc_num <- number %/% 10 # takes whole number, ignores remainder
+    
+    return(last_digit + sum_digits(trunc_num))
+  }
+}
+
+sum_digits(935068)
 ```
 
