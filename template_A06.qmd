@@ -94,6 +94,7 @@ player_info <- list(MJ = list(name = "Michael Jordan",
 ```
 
 
+
 ### Part a (1 point)
 
 Extract the value `8162` (LeBron James points) in 2 different ways:
@@ -102,7 +103,11 @@ Extract the value `8162` (LeBron James points) in 2 different ways:
 - using names
 
 ```{r}
+# indexing method
+player_info[[2]][[4]]
 
+# names method
+player_info$LJ$points
 ```
 
 
@@ -113,6 +118,17 @@ Add a new named element to the end of each player's list called `height`. The he
 Print the `player_info` list to prove you were successful.
 
 ```{r}
+# list of heights with same names attached as 'player_info' list
+heights <- list("MJ" = 78, "LJ" = 81, "KB" = 78, "KA" = 86, "SO" = 85)
+
+# goes through names of players to iterate through both lists
+for(player in names(player_info)){
+# add height of player to player_info list under same name
+# '$height', element is called height
+  player_info[[player]]$height <- heights[[player]] 
+  }
+
+player_info
 
 ```
 
@@ -132,7 +148,19 @@ Hint: initialize an empty list
 Note: this must still run correctly even if the values were to change or if another player were added to the list or if the player order changed.
 
 ```{r}
+# initialize empty list
+points_per_game <- list()
 
+# iterates through names of players and adds list item
+# each list item includes points per game
+for(player in names(player_info)){
+  points_per_game <- append(points_per_game, player_info[[player]]$points / player_info[[player]]$games_played)
+}
+
+# assigns player names to corresponding list item
+names(points_per_game) <- names(player_info)
+
+points_per_game
 ```
 
 
@@ -143,7 +171,7 @@ Use the list created in Part c and an appropriate apply function to round each v
 Store the output as a vector and print the results.
 
 ```{r}
-
+lapply(points_per_game, function(x){round(x, digits = 2)})
 ```
 
 
